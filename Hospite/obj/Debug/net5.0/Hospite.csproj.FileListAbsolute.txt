@@ -177,3 +177,5 @@ C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Account\Re
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Index.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\_VisitorLayout.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\libman.json
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Profile.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Edit.cshtml.g.cs

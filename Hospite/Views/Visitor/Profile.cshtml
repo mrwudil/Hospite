@@ -1,0 +1,89 @@
+﻿@model UserViewModel
+@{
+    Layout = "_VisitorLayout";
+}
+
+
+<div class="container">
+
+    <div class="col-12 " style="margin-top:10vh;">
+        <div class="row pb-4">
+            <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                <h2>
+                    General Information
+                </h2>
+                <a asp-action="Edit" asp-controller="Visitor" class="btn btn-success text-white"><i class="fas fa-edit"></i>Edit</a>
+            </div>
+        </div>
+
+        <div class="row pb-4">
+            <div class="col-lg-12 d-flex justify-content-around align-items-center">
+
+                <div class="col-3">
+                    <img src="~/images/user-removebg-preview.png" alt="dummy image" class="" width="250" />
+                </div>
+                <div class="col-9">
+
+                    <div class="row pb-3">
+                        <div class="col-md-6">
+                            <label for="Name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="@Model.Name" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="@Model.Email" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row pb-3">
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" placeholder="@Model.Phone" disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="gender" class="form-label">Gender</label>
+                            <input type="text" class="form-control" placeholder="Female" disabled>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 pb-3">
+                <h2>
+                    Address
+                </h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 d-flex justify-content-around align-items-center">
+
+                <div class="col-12">
+                    <div class="row pb-3">
+                        <div class="col-md-7">
+                            <label for="Address" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" disabled>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="number" class="form-label">No.</label>
+                            <input type="number" class="form-control" placeholder="49" disabled>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="text" class="form-label">City</label>
+                            <input type="text" class="form-control" placeholder="Lagos" disabled>
+                        </div>
+                    </div>
+                </div>
+                            
+                
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
