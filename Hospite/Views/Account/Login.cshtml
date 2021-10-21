@@ -1,0 +1,53 @@
+﻿
+@model LoginViewModel
+<!-- login -->
+<div class="d-flex flex-column justify-content-center align-items-center" style="padding-top:10vh;">
+
+
+    @if (ViewBag.LoginErrMsg == true)
+    {
+        <div class="col-4 p-0">
+
+            <div style="text-align:center;line-height:18px;" asp-validation-summary="All" class="alert alert-danger" id="summary"></div>
+
+        </div>
+    }
+
+    <form asp-controller="Account" asp-action="Login" method="post">
+        <div class="">
+            <div class="col-sm-12">
+                <div class="col-12 text-center">
+                    <div class="form-group">       
+                            <img src="~/images/user-removebg-preview.png" width="150" alt="" /> 
+                    </div>
+                    <hr class="hr5" />
+
+                    <div class="form-group">
+                        <input type="text" asp-for="Email" class="form-control" placeholder="Email" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <span class="text-danger font-italic small" asp-validation-for="@Model.Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Password" type="password" class="form-control" placeholder="password" required autocomplete="off" />
+                    </div>
+                    <div>
+                        <span class="text-danger font-italic small" asp-validation-for="@Model.Password"></span>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12 form-group">
+                            <button class="btn btn-primary border border-0 pl-3 pr-3" type="submit">Login</button>
+                        </div>
+                        <div class="col-12" style="font-size:14px">
+                            Create a new Account?<a asp-action="Register" asp-controller="Account"> Register  </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
