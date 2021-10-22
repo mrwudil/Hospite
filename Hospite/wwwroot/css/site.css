@@ -115,7 +115,7 @@ body {
     left: -250px;
     height: 100vh;
     z-index: 999;
-    background: #7386D5;
+    background: cornflowerblue;
     color: #fff;
     transition: all 0.3s;
     overflow-y: scroll;
@@ -131,7 +131,7 @@ body {
     height: 35px;
     line-height: 35px;
     text-align: center;
-    background: #7386D5;
+    background: cornflowerblue;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -143,7 +143,7 @@ body {
 
     #dismiss:hover {
         background: #fff;
-        color: #7386D5;
+        color: cornflowerblue;
     }
 
 .overlay {
@@ -164,7 +164,7 @@ body {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: cornflowerblue;
 }
 
 #sidebar ul.components {
@@ -184,14 +184,14 @@ body {
 }
 
     #sidebar ul li a:hover {
-        color: #7386D5;
+        color: cornflowerblue;
         background: #fff;
     }
 
 #sidebar ul li.active > a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: cornflowerblue;
 }
 
 a[data-toggle="collapse"] {

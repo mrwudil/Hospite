@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <input type="text" class="form-control" placeholder="Female" disabled>
+                            <input type="text" class="form-control" placeholder="@Model.Gender" disabled>
                         </div>
                     </div>
                 </div>
@@ -65,15 +65,15 @@
                     <div class="row pb-3">
                         <div class="col-md-7">
                             <label for="Address" class="form-label">Address</label>
-                            <input type="text" class="form-control" placeholder="Address" disabled>
+                            <input type="text" class="form-control" placeholder="@Model.Address.AddressTitle" disabled>
                         </div>
                         <div class="col-md-2">
                             <label for="number" class="form-label">No.</label>
-                            <input type="number" class="form-control" placeholder="49" disabled>
+                            <input type="number" class="form-control" placeholder="@Model.Address.StreetNo" disabled>
                         </div>
                         <div class="col-md-3">
                             <label for="text" class="form-label">City</label>
-                            <input type="text" class="form-control" placeholder="Lagos" disabled>
+                            <input type="text" class="form-control" placeholder="@Model.Address.City" disabled>
                         </div>
                     </div>
                 </div>

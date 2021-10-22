@@ -15,6 +15,11 @@ namespace Hospite.Models
 
         public string Phone { get; set; }
 
+        public string Gender { get; set; }
+
+        public bool IsAvailable { get; set; }
         public IEnumerable<Schedule> GetSchedules { get; set; }
+
+        public Address Address { get; set; }
     }
 }

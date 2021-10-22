@@ -17,6 +17,7 @@ namespace Hospite.Data.Context
         }
         public virtual DbSet<AppUser> AppUser { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
 
 
 

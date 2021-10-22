@@ -72,6 +72,16 @@ namespace Hospite.Controllers
             }
 
 
+            if (role.Contains("Employee"))
+            {
+                return RedirectToAction("Index", "Employee", new
+                {
+
+                    Id = user.Id
+                });
+            }
+
+
 
             return View(model);
         }

@@ -16,6 +16,31 @@ namespace Hospite.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.11");
 
+            modelBuilder.Entity("Hospite.Data.Address", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AddressTitle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StreetNo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Hospite.Data.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -33,6 +58,12 @@ namespace Hospite.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsAvailble")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
@@ -263,6 +294,15 @@ namespace Hospite.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Hospite.Data.Address", b =>
+                {
+                    b.HasOne("Hospite.Data.AppUser", "User")
+                        .WithOne("Address")
+                        .HasForeignKey("Hospite.Data.Address", "AppUserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Hospite.Data.Schedule", b =>
                 {
                     b.HasOne("Hospite.Data.AppUser", "AppUser")
@@ -325,6 +365,8 @@ namespace Hospite.Migrations
 
             modelBuilder.Entity("Hospite.Data.AppUser", b =>
                 {
+                    b.Navigation("Address");
+
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618

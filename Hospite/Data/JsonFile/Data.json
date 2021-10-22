@@ -3,69 +3,138 @@
 		"Name": "Gomez Reeves",
 		"Email": "gomezreeves@gink.com",
 		"UserName": "gomezreeves@gink.com",
-		"PhoneNumber": "+1 (807) 585-3011"
+		"PhoneNumber": "+1 (807) 585-3011",
+		"Gender": "Male",
+		"Address": {
+			"StreetNo": "12",
+			"AddressTitle": " Bleecker Street",
+			"City": "Knowlton"
+
+		}
 
 	},
 	{
 		"Name": "Mccormick Steele",
 		"Email": "mccormicksteele@gink.com",
 		"UserName": "mccormicksteele@gink.com",
-		"PhoneNumber": "+1 (814) 471-2888"
+		"PhoneNumber": "+1 (814) 471-2888",
+		"Gender": "Male",
+		"Address": {
+			"StreetNo": "606",
+			"AddressTitle": "Minna Street",
+			"City": "Volta"
+
+		}
 
 	},
 	{
 		"Name": "Blackwell Harvey",
 		"Email": "blackwellharvey@gink.com",
 		"UserName": "blackwellharvey@gink.com",
-		"PhoneNumber": "+1 (961) 414-3857"
+		"PhoneNumber": "+1 (961) 414-3857",
+		"Gender": "Male",
+		"Address": {
+			"StreetNo": "475",
+			"AddressTitle": "  Bokee Court",
+			"City": "Sutton"
 
+		}
 	},
 	{
 		"Name": "Lilia Burt",
 		"Email": "liliaburt@gink.com",
 		"UserName": "liliaburt@gink.com",
-		"PhoneNumber": "+1 (949) 546-2780"
+		"PhoneNumber": "+1 (949) 546-2780",
+		"Gender": "Female",
+		"Address": {
+			"StreetNo": "12",
+			"AddressTitle": " Erskine Loop",
+			"City": "Oberlin"
+
+		}
 
 	},
 	{
 		"Name": "Bender Griffin",
 		"Email": "bendergriffin@gink.com",
-		"UserName": "bendergriffin@gink.com"
+		"UserName": "bendergriffin@gink.com",
+		"Gender": "Male",
+		"Address": {
+			"StreetNo": "848",
+			"AddressTitle": "Crooke Avenue",
+			"City": "Disautel"
+
+		}
 
 	},
 	{
 		"Name": "Craft Lucas",
 		"Email": "craftlucas@gink.com",
 		"UserName": "craftlucas@gink.com",
-		"PhoneNumber": "+1 (885) 566-2128"
+		"PhoneNumber": "+1 (885) 566-2128",
+		"Gender": "Male",
+		"Address": {
+			"StreetNo": "438",
+			"AddressTitle": " Schenck Street",
+			"City": "Mooresburg"
+
+		}
 
 	},
 	{
 		"Name": "Sylvia Oneal",
 		"Email": "sylviaoneal@gink.com",
 		"UserName": "sylviaoneal@gink.com",
-		"PhoneNumber": "+1 (932) 483-2293"
+		"PhoneNumber": "+1 (932) 483-2293",
+		"Gender": "Female",
+		"Address": {
+			"StreetNo": "959",
+			"AddressTitle": " Delmonico Place",
+			"City": "Warsaw"
+
+		}
 
 	},
 	{
 		"Name": "Chelsea Frost",
 		"Email": "chelseafrost@gink.com",
 		"UserName": "chelseafrost@gink.com",
-		"PhoneNumber": "+1 (988) 539-3337"
+		"PhoneNumber": "+1 (988) 539-3337",
+		"Gender": "Female",
+		"Address": {
+			"StreetNo": "127",
+			"AddressTitle": "Himrod Street",
+			"City": " Jamestown"
+
+		}
 
 	},
 	{
 		"Name": "Vicki Mendoza",
 		"Email": "vickimendoza@gink.com",
 		"UserName": "vickimendoza@gink.com",
-		"PhoneNumber": "+1 (923) 485-3179"
+		"PhoneNumber": "+1 (923) 485-3179",
+		"Gender": "Female",
+		"Address": {
+			"StreetNo": "930",
+			"AddressTitle": "Kane Place",
+			"City": " Longbranch"
+
+		}
 
 	},
 	{
 		"Name": "Madden Simmons",
 		"Email": "maddensimmons@gink.com",
 		"UserName": "maddensimmons@gink.com",
-		"PhoneNumber": "+1 (859) 462-2939"
+		"PhoneNumber": "+1 (859) 462-2939",
+		"Gender": "Female",
+		"Address": {
+			"StreetNo": "725",
+			"AddressTitle": " Jay Street",
+			"City": "Manila"
+
+		}
 
 	}
 ]
