@@ -180,19 +180,16 @@ namespace Hospite.Migrations
                 name: "Schedules",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
                     AccessCode = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: true),
-                    Phone = table.Column<string>(type: "TEXT", nullable: true),
-                    Address = table.Column<string>(type: "TEXT", nullable: true),
-                    Date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    IsGranted = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Tag = table.Column<string>(type: "TEXT", nullable: true),
                     Purpose = table.Column<string>(type: "TEXT", nullable: true),
                     FromWhere = table.Column<string>(type: "TEXT", nullable: true),
                     ToWhom = table.Column<string>(type: "TEXT", nullable: true),
-                    CompanyName = table.Column<string>(type: "TEXT", nullable: true),
-                    EventName = table.Column<string>(type: "TEXT", nullable: true),
-                    Details = table.Column<string>(type: "TEXT", nullable: true),
+                    TimeIn = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    BookingTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TimeOut = table.Column<DateTime>(type: "TEXT", nullable: false),
                     AppUserId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>

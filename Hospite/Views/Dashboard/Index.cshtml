@@ -1,0 +1,106 @@
+﻿
+@model UserViewModel
+@{
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="col-12">
+        @if (User.IsInRole("Admin"))
+        {
+
+            <div class="row pt-3">
+                <div class="col-lg-12 d-flex justify-content-between align-items-center p-2">
+                    <div class="col-6">
+                        <a class="btn btn-primary position-relative" asp-action="Access" asp-controller="Dashboard">
+                            Grant Access
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-white">
+                                3+
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form class="d-flex" asp-action="SignOutVisitor" asp-controller="Dashboard" method="post">
+                            <input class="form-control p-4 mr-1" type="text" placeholder="Search by Tag or Phone Number" value="" aria-label="Search" name="search">
+                            <button class="btn btn-success btn-sm pr-3 pl-4" type="submit">Enter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col-lg-12 d-flex flex-wrap vdwrapper" style="margin-top:5vh;">
+                <div class="col-lg-8 center">
+                    <div class="col-lg-12 d-flex flex-column">
+                        <h1>
+                            Welcome, @Model.Name
+                        </h1>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+                            but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
+                            of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+
+                        <div>
+                            <a asp-action="BookEmployee" asp-controller="Dashboard" class="btn btn-outline-secondary btn-lg">Get Started</a>
+                        </div>
+                        @if (User.IsInRole("Employee"))
+                        {
+                            <div class="col-md-12 pt-2 pl-0">
+                                <form class="d-flex" asp-action="SignOutVisitor" asp-controller="Dashboard" method="post">
+                                    <input class="form-control p-4 mr-1" type="text" placeholder="Search by Tag or Phone Number" value="" aria-label="Search" name="search">
+                                    <button class="btn btn-success btn-sm pr-3 pl-4" type="submit">Enter</button>
+                                </form>
+                            </div>
+                        }
+
+                    </div>
+                         
+                   
+                </div>
+                <div class="col-lg-4 shadow bg-white" style="border-radius:3px;">
+
+                    <div class="container-calendar">
+                        <h3 id="monthAndYear"></h3>
+
+                        <div class="button-container-calendar">
+                            <button id="previous" onclick="previous()">&#8249;</button>
+                            <button id="next" onclick="next()">&#8250;</button>
+                        </div>
+
+                        <table class="table-calendar" id="calendar" data-lang="en">
+                            <thead id="thead-month"></thead>
+                            <tbody id="calendar-body"></tbody>
+                        </table>
+
+                        <div class="footer-container-calendar">
+                            <label for="month">Jump To: </label>
+                            <select id="month" onchange="jump()">
+                                <option value=0>Jan</option>
+                                <option value=1>Feb</option>
+                                <option value=2>Mar</option>
+                                <option value=3>Apr</option>
+                                <option value=4>May</option>
+                                <option value=5>Jun</option>
+                                <option value=6>Jul</option>
+                                <option value=7>Aug</option>
+                                <option value=8>Sep</option>
+                                <option value=9>Oct</option>
+                                <option value=10>Nov</option>
+                                <option value=11>Dec</option>
+                            </select>
+                            <select id="year" onchange="jump()"></select>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

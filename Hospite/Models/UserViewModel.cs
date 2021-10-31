@@ -22,4 +22,7 @@ namespace Hospite.Models
 
         public Address Address { get; set; }
     }
+
+
+   
 }

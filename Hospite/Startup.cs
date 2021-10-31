@@ -1,5 +1,6 @@
 using Hospite.Data;
 using Hospite.Data.Context;
+using Hospite.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,12 @@ namespace Hospite
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<HospiteDbContext>();
+
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin"));
+                option.AddPolicy("UserRolePolicy", policy => policy.RequireRole("Employee"));
+            });
                 
             services.AddDbContextPool<HospiteDbContext>(dbContextOptions => 
             dbContextOptions.UseSqlite(
@@ -42,6 +49,10 @@ namespace Hospite
                 options.IdleTimeout = TimeSpan.FromMinutes(120);
 
             });
+            services.AddSession();
+            services.AddHttpContextAccessor();
+
+            services.AddScoped<IScheduleRepository, ScheduleRepository>();
 
         }
 
@@ -66,6 +77,7 @@ namespace Hospite
             app.UseSession();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -13,10 +13,12 @@ namespace Hospite.Controllers
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
                 
         }
        
@@ -47,34 +49,31 @@ namespace Hospite.Controllers
             {
                 return null;
             }
+            var checkPassword = await _signInManager.PasswordSignInAsync(user,model.Password,false,false);
+            if (!checkPassword.Succeeded)
+            {
+                return View();
+            }
 
             var role = await _userManager.GetRolesAsync(user);
 
             HttpContext.Session.SetString("Id",user.Id);
-            HttpContext.Session.SetString("role",role[0]);
+            HttpContext.Session.SetString("Role",role[0]);
 
 
             if (role.Contains("Admin"))
             {
-                return RedirectToAction("Admin", "Dashboard", new
+                return RedirectToAction("Index", "Dashboard", new
                 {
                     Id = user.Id
                 }
                 );
             }
 
-            if(role.Contains("Customer"))
-            {
-                return RedirectToAction("Index", "Visitor", new {
-
-                    Id = user.Id
-                });
-            }
-
 
             if (role.Contains("Employee"))
             {
-                return RedirectToAction("Index", "Employee", new
+                return RedirectToAction("Index", "Dashboard", new
                 {
 
                     Id = user.Id
@@ -115,6 +114,13 @@ namespace Hospite.Controllers
             return RedirectToAction("Index","Visitor");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
 
     }

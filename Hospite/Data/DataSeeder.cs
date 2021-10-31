@@ -45,7 +45,7 @@ namespace Hospite.Data
                 if (!userManager.Users.Any())
                 {
 
-                    var roles = new string[] { "Admin", "Customer","Employee" };
+                    var roles = new string[] { "Admin","Employee" };
                     foreach (var role in roles)
                     {
                         var roleExist = await roleManager.RoleExistsAsync(role);
@@ -63,7 +63,7 @@ namespace Hospite.Data
                     // deserilization of Json object
                     var userInfo = JsonConvert.DeserializeObject<List<AppUser>>(userData);
 
-                    var (adminCount, customerCount,employeeCount) = (0, 0, 0);
+                    var (adminCount, employeeCount) = (0, 0);
 
                     foreach (var user in userInfo)
                     {
@@ -73,17 +73,11 @@ namespace Hospite.Data
                             await userManager.AddToRoleAsync(user, roles[0]);
                             ++adminCount;
                         }
-                        else if (employeeCount < 6)
-                        {
-                            await userManager.CreateAsync(user, regularPassword);
-                            await userManager.AddToRoleAsync(user, roles[2]);
-                            ++employeeCount;
-                        }
                         else
                         {
                             await userManager.CreateAsync(user, regularPassword);
                             await userManager.AddToRoleAsync(user, roles[1]);
-                            ++customerCount;
+                            ++employeeCount;
                         }
 
 

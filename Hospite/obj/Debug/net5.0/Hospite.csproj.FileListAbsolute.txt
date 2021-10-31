@@ -164,10 +164,6 @@ C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Home\Priva
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Edit.cshtml.g.cs
-C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Index.cshtml.g.cs
-C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\Profile.cshtml.g.cs
-C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\_VisitorLayout.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.RazorTargetAssemblyInfo.cache
@@ -178,5 +174,11 @@ C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.dll
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\ref\Hospite.dll
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.pdb
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.genruntimeconfig.cache
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\BookEmployee.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\Edit.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\Index.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\Profile.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\_Layout.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\ViewVisitors.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.csprojAssemblyReference.cache
-C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Visitor\BookEmployee.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\Access.cshtml.g.cs

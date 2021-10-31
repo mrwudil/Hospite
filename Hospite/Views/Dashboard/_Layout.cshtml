@@ -29,7 +29,7 @@
 
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar"> 
+        <nav id="sidebar">
             <div id="dismiss">
                 <i class="fas fa-arrow-left"></i>
             </div>
@@ -39,24 +39,29 @@
             </div>
 
             <ul class="list-unstyled components">
-               
+
                 <li class="active">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Visitor" asp-action="Index">Dashboard</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
                 </li>
+                @if (User.IsInRole("Admin"))
+                { 
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Profile">View Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Dashoard" asp-action="Edit">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Dashoard" asp-action="Edit">Visitors</a>
+                    </li>
+                 }
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Visitor" asp-action="Profile">View Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Visitor" asp-action="Edit">Edit Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Messages">Notifications</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Visitor" asp-action="BookEmployee">Book Employee</a>
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="BookEmployee">Book Employee</a>
                 </li>
 
-            </ul>       
+            </ul>
         </nav>
 
         <!-- Page Content  -->
@@ -78,14 +83,23 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Visitor" asp-action="Index">Dashboard</a>
-                            </li>
-                           
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                            </li>
+
+                            @if (User.Identity.IsAuthenticated)
+                             {
+
+                              
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <form asp-controller="Account" asp-action="Logout" method="post"><button class="btn btn-outline-secondary">Logout</button></form>
+                                </li>
+
+                            }
                         </ul>
+
+
                     </div>
                 </div>
             </nav>
@@ -101,10 +115,8 @@
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

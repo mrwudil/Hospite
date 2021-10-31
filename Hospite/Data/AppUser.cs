@@ -14,11 +14,10 @@ namespace Hospite.Data
         public string Name { get; set; }
         public string Gender { get; set; }
         public Address Address { get; set; }
-
         public bool IsAvailble { get; set; } = false;
 
         // One AppUser to Many Relationship
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public  ICollection<Schedule> Schedules { get; set; }
         public AppUser()
         {
             Schedules = new HashSet<Schedule>();

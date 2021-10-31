@@ -8,21 +8,16 @@ namespace Hospite.Data
 {
     public class Schedule
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string AccessCode { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public DateTime Date { get; set; }
-
-        // Details about the Schedule/Meeting
+        public bool IsGranted { get; set; } = false;
+        public string Tag { get; set; }
         public string Purpose { get; set; }
         public string FromWhere { get; set; }
         public string ToWhom { get; set; }
-        public string CompanyName { get; set; }
-        public string EventName { get; set; }
-        public string Details { get; set; }
+        public DateTime TimeIn { get; set; }
+        public DateTime BookingTime { get; set; } = DateTime.Now;
+        public DateTime TimeOut { get; set; }
 
 
         // One to Many Schedule Relationship

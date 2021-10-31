@@ -1,0 +1,174 @@
+﻿@model RegisterVisitorViewModel
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container">
+
+    <div class="col-12 " style="margin-top:10vh; margin-bottom:5vh;">
+        <form method="post" asp-action="BookEmployee" asp-controller="Dashboard">
+
+
+            <div class="row">
+                @if (ViewBag.AgentRegistrationErr == true)
+                {
+                    <div class="d-flex justify-content-center ">
+
+                        <div style="width:100%; text-align:justify;" asp-validation-summary="All" class="alert alert-danger forgotPass-list-error" id="summary"></div>
+
+                    </div>
+                }
+            </div>
+            <div class="row">
+
+                <div class="col-lg-6">
+
+
+                    <div class="row pb-4">
+                        <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                            <h2>
+                                General Information
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div class="col-lg-12 d-flex justify-content-around align-items-center">
+
+                            <div class="col-12">
+
+                                <div class="row pb-3">
+                                    <div class="col-md-6">
+                                        <label for="Name" asp-for="Name" class="form-label">Full Name</label>
+                                        <input type="text" asp-for="@Model.Name" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Name"></span></small>
+                                    <div class="col-md-6">
+                                        <label for="email" asp-for="Email" class="form-label">Email</label>
+                                        <input type="email" asp-for="@Model.Email" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Email"></span></small>
+                                </div>
+
+                                <div class="row pb-3">
+                                    <div class="col-md-6">
+                                        <label for="phone" asp-for="PhoneNumber" class="form-label">Phone</label>
+                                        <input type="text" asp-for="@Model.PhoneNumber" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="PhoneNumber"></span></small>
+                                    <div class="col-md-6">
+                                        <label for="gender" asp-for="Gender" class="form-label">Gender</label>
+                                        <select asp-for="@Model.Gender" class="form-control">
+                                            <option>Select Gender ...</option>
+                                            <option value="Male"> Male</option>
+                                            <option value="Female">Female</option>
+
+                                        </select>
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Gender"></span></small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 pb-3">
+                            <h2>
+                                Address
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 d-flex justify-content-around align-items-center">
+
+                            <div class="col-12">
+                                <div class="row pb-3">
+                                    <div class="col-md-7">
+                                        <label for="Address" asp-for="Address.AddressTitle" class="form-label">Address</label>
+                                        <input type="text" asp-for="@Model.Address.AddressTitle" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Address"></span></small>
+                                    <div class="col-md-2">
+                                        <label for="number" asp-for="Address.StreetNo" class="form-label">No.</label>
+                                        <input type="number" asp-for="@Model.Address.StreetNo" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Address.StreetNo"></span></small>
+                                    <div class="col-md-3">
+                                        <label for="text" asp-for="Address.City" class="form-label">City</label>
+                                        <input type="text" asp-for="@Model.Address.City" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Address.StreetNo"></span></small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-5 offset-1">
+
+                    <div class="row pb-4">
+                        <div class="col-lg-12 d-flex justify-content-between align-items-center">
+                            <h2>
+                                Official
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="row pb-4">
+                        <div class="col-lg-12 d-flex justify-content-around align-items-center">
+
+                            <div class="col-12">
+                                <div class="row pb-3">
+                                    <div class="col-md-12">
+                                        <label for="phone" asp-for="Purpose" class="form-label">Purpose of Visiting</label>
+                                        <input type="text" asp-for="Purpose" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Purpose"></span></small>
+
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-md-12">
+                                        <label for="phone" asp-for="FromWhere" class="form-label">From Where</label>
+                                        <input type="text" asp-for="FromWhere" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="FromWhere"></span></small>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-md-6">
+                                        <label for="text" asp-for="ToWhom" class="form-label">Whom to Visit</label>
+                                        <input type="text" asp-for="ToWhom" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="ToWhom"></span></small>
+                                    <div class="col-md-6">
+                                        <label for="text" asp-for="TagNo" class="form-label">Tag No</label>
+                                        <input type="text" asp-for="TagNo" class="form-control" placeholder="" required >
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="TagNo"></span></small>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-md-12">
+
+                                        <button type="submit" class="btn btn-secondary btn-lg pl-5 pr-5">Book</button>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+       

@@ -116,44 +116,34 @@ namespace Hospite.Migrations
 
             modelBuilder.Entity("Hospite.Data.Schedule", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("AccessCode")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("AppUserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("EventName")
+                    b.Property<DateTime>("BookingTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FromWhere")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("IsGranted")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Purpose")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Tag")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TimeIn")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("TimeOut")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ToWhom")
