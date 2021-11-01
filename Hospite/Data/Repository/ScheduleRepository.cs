@@ -20,7 +20,7 @@ namespace Hospite.Data.Repository
         public async Task<bool> CreateSchedule(Schedule model)
         {
             var addSchedule = _context.Schedules.Add(model);
-            if (await _context.SaveChangesAsync() < 1) return false;
+            if (await _context.SaveChangesAsync() > 0) return false;
 
             return true;
         }
@@ -37,6 +37,15 @@ namespace Hospite.Data.Repository
             var res = _context.Schedules.FirstOrDefault(x => x.Tag == search && (x.BookingTime > DateTime.Now.AddHours(-24) && x.BookingTime <= DateTime.Now));
 
             return res;      
+        }
+
+        public async Task<bool> UpdateSchedule(Schedule model)
+        {
+            _context.Schedules.Update(model);
+
+             if(await _context.SaveChangesAsync() > 0) return true;
+
+            return false;
         }
     }
 }

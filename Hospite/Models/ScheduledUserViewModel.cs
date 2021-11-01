@@ -13,6 +13,7 @@ namespace Hospite.Models
         public string UserId { get; set; }
         public string Contact { get; set; }
         public string TagNo { get; set; }
+        public bool Cancelled { get; set; }
         public DateTime BookingTime { get; set; }
 
         public bool IsGranted { get; set; }

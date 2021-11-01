@@ -10,5 +10,6 @@ namespace Hospite.Data.Repository
         Task<bool> CreateSchedule(Schedule model);
         Task<Schedule> GetScheduleByTagNumber(string search);
         Task<IEnumerable<Schedule>> GetAllSchedule();
+        Task<bool> UpdateSchedule(Schedule model);
     }
 }

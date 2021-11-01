@@ -34,7 +34,7 @@
                                 <th class="text-left">Phone Number</th>
                                 <th class="text-left">Booking Time</th>
                                 <th></th>
-                                <th>Status</th>
+                                <th colspan="2">Status</th>
 
                             </tr>
                         </thead>
@@ -43,38 +43,52 @@
                         <tbody>
 
                             @foreach (var item in Model)
-                            { 
-                                
-                                    <tr>
-                                        <td class="text-left">                                 
-                                           @count .
+                            {
+
+                                <tr>
+                                    <td class="text-left">
+                                        @count .
+                                    </td>
+                                    <td class="text-left">
+                                        @item.Name
+                                    </td>
+                                    <td class="text-left">
+                                        @item.Contact
+                                    </td>
+                                    <td class="text-left">
+                                        @item.BookingTime
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" asp-action="ViewDetails" asp-controller="Dashboard" asp-route-tag="@item.TagNo" asp-route-id="@item.UserId"> Detail</a>
+                                    </td>
+                                    @if (@item.IsGranted == true)
+                                    {
+                                        <td>
+                                            <i class="badge badge-pill badge-secondary">Signed In</i>
                                         </td>
-                                        <td class="text-left">
-                                            @item.Name
-                                        </td>
-                                        <td class="text-left">
-                                            @item.Contact
-                                        </td>
-                                        <td class="text-left">
-                                            @item.BookingTime
+                                    }
+                                    else if (item.Cancelled == false && item.IsGranted == false)
+                                    {
+
+                                        <td>
+
+                                            <a class="btn btn-success" asp-action="GrantAccess" asp-controller="Dashboard" asp-route-tag="@item.TagNo">Grant Access</a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-primary" asp-action="ViewDetails" asp-controller="Dashboard" asp-route-tag ="@item.TagNo" asp-route-id="@item.UserId"> Detail</a>
+
+                                            <a class="btn btn-danger" asp-action="GrantAccess" asp-controller="Dashboard" asp-route-tag="@item.TagNo">Cancel</a>
                                         </td>
-                                        @if(@item.IsGranted == true)
-                                        {
-                                            <td>
-                                                <i class="badge badge-pill badge-secondary">No Access</i>
-                                            </td>
-                                        }else{
 
-                                            <td>
-                                                <a class="btn btn-success" asp-action="GrantAccess" asp-controller="Dashboard" asp-route-id="@item.UserId" asp-route-tag ="@item.TagNo">Grant Access</a>
-                                            </td>
-                                        
-                                        }
+                                    }
+                                    else if (item.IsGranted == false && item.Cancelled == true)
+                                    {
+                                        <td>
+                                            <i class="badge badge-pill badge-secondary">Cancelled</i>
+                                        </td>
 
-                                    </tr>
+                                    }
+
+                                </tr>
                                 count++;
                             }
                         </tbody>

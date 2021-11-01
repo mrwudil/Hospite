@@ -9,10 +9,12 @@ namespace Hospite.Models
     public class SignOutViewModel
     {
         public string VisitorName { get; set; }
+        public string UserId { get; set; }
         public string Gender { get; set; }
         public string Email { get; set; }
         public string TagNo { get; set; }
         public string PhoneNumber { get; set; }
+        public bool Cancelled { get; set; }
         public DateTime BookingTime { get; set; }
         public string FromWhere { get; set; }
         public string Purpose { get; set; }

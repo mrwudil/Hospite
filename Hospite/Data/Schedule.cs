@@ -15,6 +15,8 @@ namespace Hospite.Data
         public string Purpose { get; set; }
         public string FromWhere { get; set; }
         public string ToWhom { get; set; }
+
+        public bool Cancelled { get; set; } = false;
         public DateTime TimeIn { get; set; }
         public DateTime BookingTime { get; set; } = DateTime.Now;
         public DateTime TimeOut { get; set; }

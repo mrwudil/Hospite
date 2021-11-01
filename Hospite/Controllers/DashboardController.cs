@@ -256,7 +256,9 @@ namespace Hospite.Controllers
                 TagNo = res.Tag,
                 GrantedAccess = res.IsGranted,
                 BookingTime  = res.BookingTime,
-                VisitorName = user.Name
+                VisitorName = user.Name,
+                UserId = user.Id,
+                Cancelled = res.Cancelled
             };
 
             return View("ViewVisitors", myRes);
@@ -280,7 +282,8 @@ namespace Hospite.Controllers
                     Contact = item.AppUser.PhoneNumber,
                     Name = item.AppUser.Name,
                     UserId = item.AppUserId,
-                    TagNo = item.Tag
+                    TagNo = item.Tag,
+                    Cancelled = item.Cancelled
                 };
                 content.Add(visitors);
             }
@@ -299,7 +302,7 @@ namespace Hospite.Controllers
                 return RedirectToAction("Access");
             }        
             var user = await _userManager.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
-
+       
 
             var myRes = new SignOutViewModel
             {
@@ -315,7 +318,9 @@ namespace Hospite.Controllers
                 Gender = user.Gender,
                 TimeIn = res.TimeIn,
                 TimeOut = res.TimeOut,
-                Email = user.Email
+                Email = user.Email,
+                UserId = user.Id
+               
 
             };
 
@@ -323,7 +328,87 @@ namespace Hospite.Controllers
          
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GrantAccess(string tag)
+        {
+            
 
+            if (string.IsNullOrEmpty(tag))
+            {
+                return View("Access");
+            }
+
+            var res =await _scheduleRepository.GetScheduleByTagNumber(tag);
+
+            res.TimeIn = DateTime.Now;
+            res.IsGranted = true;
+
+            var update = await _scheduleRepository.UpdateSchedule(res);
+
+            if (update == false) return RedirectToAction("Access");
+
+            //trigger a send mail here
+
+
+            //
+            return RedirectToAction("Access");
+
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SignVisitorOut(string Id, string Tag)
+        {
+            if (string.IsNullOrEmpty(Tag))
+            {
+                return View("Access");
+            }
+
+            var res = await _scheduleRepository.GetScheduleByTagNumber(Tag);
+
+            res.TimeOut = DateTime.Now;
+            res.IsGranted = true;
+            res.Cancelled = true;
+
+            var update = await _scheduleRepository.UpdateSchedule(res);
+
+            if (update == false) return RedirectToAction("Access");
+
+            //trigger a send mail here
+
+
+            //
+            return RedirectToAction("ViewDetails", new { 
+                id = Id,
+                tag = Tag
+            });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> CancelBooking(string tag)
+        {
+            if (string.IsNullOrEmpty(tag))
+            {
+                return View("Access");
+            }
+
+            var res = await _scheduleRepository.GetScheduleByTagNumber(tag);
+            res.Cancelled = false;
+            res.IsGranted = false;
+            res.TimeOut = DateTime.Now;
+
+            var update = await _scheduleRepository.UpdateSchedule(res);
+
+            if (update == false) return RedirectToAction("Access");
+
+            //trigger a send mail here
+
+
+            //
+            return RedirectToAction("Access");
+        }
 
     }
 }

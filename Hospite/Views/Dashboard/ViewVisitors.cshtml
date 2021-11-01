@@ -1,5 +1,14 @@
 ﻿@model SignOutViewModel
 
+@{ 
+    var newTimeOut = string.Empty ;
+    if (Model.TimeOut < DateTime.Now.AddHours(-24))
+    {
+        newTimeOut = "Not";
+    }
+   
+}
+
 <div class="row d-flex justify-content-center align-content-center pt-5" style="margin-top:2vh;">
     <div class="col-lg-8 col-sm-12 box-shadow border border-0 pb-3">
         <div class="col-sm-12 d-flex flex-column text-center p-3">
@@ -11,15 +20,20 @@
 
 
 
-            @if (Model.GrantedAccess == false)
+            @if (Model.GrantedAccess == false && Model.Cancelled == false)
             {
                 <h6 class="text-danger font-weight-bolder">
                     No Access Granted Yet
                 </h6>
             }
-            else
+            
+            @if (Model.Cancelled == true)
             {
-                <a class="btn btn-warning" asp-action="SignVisitorOut" asp-controller="Dashboard"> Sign Out</a>
+
+            }
+            else 
+            {
+                <a class="btn btn-warning col-2 ml-auto" asp-action="SignVisitorOut" asp-controller="Dashboard" asp-route-Tag="@Model.TagNo" asp-route-Id="@Model.UserId"> Sign Out</a>
             }
 
 
@@ -90,8 +104,6 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-
-
                           <div class="col-lg-6">
                         
 
@@ -124,7 +136,15 @@
                         <div class="row mb-3">
                             <label for="Phome" class="col-sm-4 col-form-label">Time Out</label>
                             <div class="col-sm-8">
-                                <input class="form-control" placeholder="@Model.TimeOut" disabled>
+                                @if (newTimeOut == "Not")
+                                {
+
+                                    <input class="form-control" placeholder="Not Signed Out" disabled>
+                                }
+                                else
+                                {
+                                    <input class="form-control" placeholder="@Model.TimeOut" disabled>
+                                }
                             </div>
                         </div>
 
