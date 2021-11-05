@@ -53,6 +53,8 @@ namespace Hospite
             services.AddHttpContextAccessor();
 
             services.AddScoped<IScheduleRepository, ScheduleRepository>();
+            services.AddTransient<IMailService, MailService>();
+            services.Configure<MailConfig>(Configuration.GetSection("SmtpConfig"));
 
         }
 

@@ -17,6 +17,8 @@ namespace Hospite.Models
 
         public string Gender { get; set; }
 
+        public int Notification { get; set; }
+
         public bool IsAvailable { get; set; }
         public IEnumerable<Schedule> GetSchedules { get; set; }
 

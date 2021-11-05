@@ -182,3 +182,7 @@ C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\ViewVisitors.cshtml.g.cs
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Hospite.csprojAssemblyReference.cache
 C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\Access.cshtml.g.cs
+C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\MailKit.dll
+C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\MimeKit.dll
+C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\NETCore.MailKit.dll
+C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\BouncyCastle.Crypto.dll

@@ -1,8 +1,18 @@
 ﻿@model RegisterVisitorViewModel
 @{
     Layout = "_Layout";
+
+    var message = ViewBag.Message;
 }
 
+@if(ViewBag.Message != null)
+ {
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
+ }
 
 <div class="container">
 
@@ -86,19 +96,20 @@
 
                             <div class="col-12">
                                 <div class="row pb-3">
-                                    <div class="col-md-7">
-                                        <label for="Address" asp-for="Address.AddressTitle" class="form-label">Address</label>
-                                        <input type="text" asp-for="@Model.Address.AddressTitle" class="form-control" placeholder="" required >
-                                    </div>
-                                    <small class="mb-1 text-danger"><span asp-validation-for="Address"></span></small>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <label for="number" asp-for="Address.StreetNo" class="form-label">No.</label>
-                                        <input type="number" asp-for="@Model.Address.StreetNo" class="form-control" placeholder="" required >
+                                        <input type="number" asp-for="@Model.Address.StreetNo" class="form-control" placeholder="" required>
                                     </div>
                                     <small class="mb-1 text-danger"><span asp-validation-for="Address.StreetNo"></span></small>
+                                    <div class="col-md-6">
+                                        <label for="Address" asp-for="Address.AddressTitle" class="form-label">Address</label>
+                                        <input type="text" asp-for="@Model.Address.AddressTitle" class="form-control" placeholder="" required>
+                                    </div>
+                                    <small class="mb-1 text-danger"><span asp-validation-for="Address"></span></small>
+
                                     <div class="col-md-3">
                                         <label for="text" asp-for="Address.City" class="form-label">City</label>
-                                        <input type="text" asp-for="@Model.Address.City" class="form-control" placeholder="" required >
+                                        <input type="text" asp-for="@Model.Address.City" class="form-control" placeholder="" required>
                                     </div>
                                     <small class="mb-1 text-danger"><span asp-validation-for="Address.StreetNo"></span></small>
                                 </div>

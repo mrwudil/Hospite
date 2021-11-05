@@ -27,7 +27,7 @@ namespace Hospite.Data.Repository
 
         public async Task<IEnumerable<Schedule>> GetAllSchedule()
         {
-            var getSchedules =await _context.Schedules.Include(x =>x.AppUser).ToListAsync();
+            var getSchedules =await _context.Schedules.Include(x =>x.AppUser).OrderByDescending(x => x.BookingTime).ToListAsync();
             return getSchedules;
 
         }
@@ -46,6 +46,18 @@ namespace Hospite.Data.Repository
              if(await _context.SaveChangesAsync() > 0) return true;
 
             return false;
+        }
+
+        public async Task<bool> TagExist(string tag)
+        {
+            var res = _context.Schedules.Any(x => x.Tag == tag);
+            return res;
+        }
+
+        public int Notification()
+        {
+            var res = _context.Schedules.Where( x => x.BookingTime <= DateTime.Now && x.IsGranted == false ).Count();
+            return res;
         }
     }
 }

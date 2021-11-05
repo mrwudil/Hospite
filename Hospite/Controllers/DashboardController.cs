@@ -16,14 +16,16 @@ namespace Hospite.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IScheduleRepository _scheduleRepository;
+        private readonly IMailService _mailService;
 
-        public DashboardController(UserManager<AppUser> userManager,IScheduleRepository scheduleRepository)
+        public DashboardController(UserManager<AppUser> userManager,IScheduleRepository scheduleRepository, IMailService mailService)
         {
             _userManager = userManager;
             _scheduleRepository = scheduleRepository;
+            _mailService = mailService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? msg)
         {
             var id = HttpContext.Session.GetString("Id");
             if (string.IsNullOrEmpty(id))
@@ -37,16 +39,19 @@ namespace Hospite.Controllers
                 return BadRequest();
             }
 
+            var num = _scheduleRepository.Notification();
+
             var res = new UserViewModel
             {
                 Name = user.Name,
                 Phone = user.PhoneNumber,
                 Email = user.Email,
-                GetSchedules = user.Schedules
+                GetSchedules = user.Schedules,
+                Notification = num
 
             };
 
-
+            ViewBag.Message = msg;
             return View(res);
         }
 
@@ -91,6 +96,8 @@ namespace Hospite.Controllers
             var user = await _userManager.Users.Include(x => x.Address).FirstOrDefaultAsync(x=> x.Id == Id);
             if(user == null)
             {
+
+                
                 return BadRequest();
             }
 
@@ -167,11 +174,20 @@ namespace Hospite.Controllers
             var ListOfSchedule = new List<Schedule>();
             if (!ModelState.IsValid)
             {
-                ViewBag.AgentRegistrationErr = true;
+                ViewBag.Message = "Ops! An error occured";
                 return View(model);
             }
 
+            var tag = await _scheduleRepository.TagExist(model.TagNo);
+
+            if(tag == true)
+            {
+
+                ViewBag.Message = "Tag Already exist!";
+                return View(model);
+            }
             var checkUser =await _userManager.FindByEmailAsync(model.Email);
+
 
             //mapping here
             var userAddress = new Address
@@ -209,6 +225,7 @@ namespace Hospite.Controllers
                 var res = await _userManager.CreateAsync(newUser, Password);
                 if (!res.Succeeded)
                 {
+                    ViewBag.Message = "User not Created!";
                     return BadRequest();
                 }
 
@@ -227,11 +244,16 @@ namespace Hospite.Controllers
                 };
 
                 var sch =await _scheduleRepository.CreateSchedule(userSchedule);
-                if (!sch) return BadRequest();
+                if (!sch)
+                {
+                    ViewBag.Message = "Schedule not Created!";
+                    return BadRequest();
+                }
+
 
             }
 
-
+            ViewBag.Message = "Schedule Created!";
             return RedirectToAction("Index");
         }
 
@@ -241,25 +263,37 @@ namespace Hospite.Controllers
         {
             if (string.IsNullOrEmpty(search))
             {
+                ViewBag.Message = "An error Occured";
                 return BadRequest();
             }
 
             var res =await _scheduleRepository.GetScheduleByTagNumber(search);
             if(res == null)
             {
-                return RedirectToAction("Index");
+              
+                return RedirectToAction("Index", new { msg = "Schedule Does Not Exist"
+                     });
             }
-            var user = await _userManager.FindByIdAsync(res.AppUserId);
+            var user = await _userManager.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == res.AppUserId);
             var myRes = new SignOutViewModel
             {
                 PhoneNumber = user.PhoneNumber,
                 TagNo = res.Tag,
                 GrantedAccess = res.IsGranted,
-                BookingTime  = res.BookingTime,
+                BookingTime = res.BookingTime,
                 VisitorName = user.Name,
+                Address = user.Address,
+                FromWhere = res.FromWhere,
+                Purpose = res.Purpose,
+                ToWhom = res.ToWhom,
+                Gender = user.Gender,
+                TimeIn = res.TimeIn,
+                TimeOut = res.TimeOut,
+                Email = user.Email,
                 UserId = user.Id,
                 Cancelled = res.Cancelled
             };
+
 
             return View("ViewVisitors", myRes);
 
@@ -299,6 +333,7 @@ namespace Hospite.Controllers
             var res = await _scheduleRepository.GetScheduleByTagNumber(tag);
             if (res == null)
             {
+                ViewBag.Message = "Schedule Does Not Exist";
                 return RedirectToAction("Access");
             }        
             var user = await _userManager.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
@@ -319,7 +354,8 @@ namespace Hospite.Controllers
                 TimeIn = res.TimeIn,
                 TimeOut = res.TimeOut,
                 Email = user.Email,
-                UserId = user.Id
+                UserId = user.Id,
+                Cancelled = res.Cancelled
                
 
             };
@@ -335,20 +371,31 @@ namespace Hospite.Controllers
 
             if (string.IsNullOrEmpty(tag))
             {
+                ViewBag.Message = "Invalid tag";
                 return View("Access");
             }
 
             var res =await _scheduleRepository.GetScheduleByTagNumber(tag);
+            if (res == null)
+            {
+                ViewBag.Message = "Schedule Does Not Exist";
+                return RedirectToAction("Access");
 
+            }
+            var user = await _userManager.FindByIdAsync(res.AppUserId);
             res.TimeIn = DateTime.Now;
             res.IsGranted = true;
 
             var update = await _scheduleRepository.UpdateSchedule(res);
-
-            if (update == false) return RedirectToAction("Access");
+            if (!update)
+            {
+                ViewBag.Message = "Update failed";
+                return RedirectToAction("Access");
+            }
 
             //trigger a send mail here
-
+            var response = await SendMailAsync(user.Name, "Access Granted", "You have been Granted Access to see the requested Employee", user.Email);
+            
 
             //
             return RedirectToAction("Access");
@@ -362,22 +409,33 @@ namespace Hospite.Controllers
         {
             if (string.IsNullOrEmpty(Tag))
             {
+
                 return View("Access");
             }
 
             var res = await _scheduleRepository.GetScheduleByTagNumber(Tag);
+            if (res == null)
+            {
+                ViewBag.Message = "Schedule Does Not Exist";
+                return RedirectToAction("Access");
+            }
+            var user = await _userManager.FindByIdAsync(res.AppUserId);
 
             res.TimeOut = DateTime.Now;
-            res.IsGranted = true;
+            res.IsGranted = false;
             res.Cancelled = true;
 
             var update = await _scheduleRepository.UpdateSchedule(res);
 
-            if (update == false) return RedirectToAction("Access");
+            if (update == false)
+            {
+                ViewBag.Message = "Update falied";
+                return RedirectToAction("Access");
+            }
 
             //trigger a send mail here
-
-
+            var response = await SendMailAsync(user.Name, "Signed Out", $"Thank you {user.Name} for visiting",user.Email);
+           
             //
             return RedirectToAction("ViewDetails", new { 
                 id = Id,
@@ -395,19 +453,53 @@ namespace Hospite.Controllers
             }
 
             var res = await _scheduleRepository.GetScheduleByTagNumber(tag);
-            res.Cancelled = false;
-            res.IsGranted = false;
+            if (res == null)
+            {
+                ViewBag.Message = "Schedule Does Not Exist";
+                return RedirectToAction("Access");
+            }
+            var user = await _userManager.FindByIdAsync(res.AppUserId);
+            res.Cancelled = true;
             res.TimeOut = DateTime.Now;
 
             var update = await _scheduleRepository.UpdateSchedule(res);
 
-            if (update == false) return RedirectToAction("Access");
-
+            if (update == false)
+            {
+                ViewBag.Message = "Update falied";
+                return RedirectToAction("Access");
+            }
             //trigger a send mail here
-
+            var response = await SendMailAsync(user.Name, "Appointment Canceled", $"Sorry,{user.Name}. The requested Employee is not available today. Try some Other Time..Thank you for visiting.", user.Email);
+           
 
             //
             return RedirectToAction("Access");
+        }
+
+
+        private async Task<bool> SendMailAsync (string name,string subject,string body,string recieptMail)
+        {
+            try
+            {
+                var mailRequest = new MailRequest
+                {
+                    Name = name,
+                    Subject = subject,
+                    Body = body,
+                    RecipientMail = recieptMail
+                };
+
+                await _mailService.SendMailAsync(mailRequest);
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+
+            return true;
         }
 
     }

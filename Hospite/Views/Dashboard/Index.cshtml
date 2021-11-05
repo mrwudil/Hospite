@@ -2,6 +2,16 @@
 @model UserViewModel
 @{
     Layout = "_Layout";
+    var message = ViewBag.Message;
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
 }
 
 <div class="container">
@@ -13,9 +23,9 @@
                 <div class="col-lg-12 d-flex justify-content-between align-items-center p-2">
                     <div class="col-6">
                         <a class="btn btn-primary position-relative" asp-action="Access" asp-controller="Dashboard">
-                            Grant Access
+                            Notifications
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger text-white">
-                                3+
+                                @Model.Notification +
                             </span>
                         </a>
                     </div>
@@ -58,8 +68,8 @@
                         }
 
                     </div>
-                         
-                   
+
+
                 </div>
                 <div class="col-lg-4 shadow bg-white" style="border-radius:3px;">
 

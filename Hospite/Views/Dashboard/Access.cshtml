@@ -5,6 +5,15 @@
     var count = 1;
 }
 
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@ViewBag.Message");
+        }
+    </script>
+}
+
 <div class="container">
     <div class="col-12">
 
@@ -34,7 +43,7 @@
                                 <th class="text-left">Phone Number</th>
                                 <th class="text-left">Booking Time</th>
                                 <th></th>
-                                <th colspan="2">Status</th>
+                                <th colspan="3">Status</th>
 
                             </tr>
                         </thead>
@@ -61,11 +70,12 @@
                                     <td>
                                         <a class="btn btn-primary" asp-action="ViewDetails" asp-controller="Dashboard" asp-route-tag="@item.TagNo" asp-route-id="@item.UserId"> Detail</a>
                                     </td>
-                                    @if (@item.IsGranted == true)
+                                    @if (item.IsGranted == false && item.Cancelled == true)
                                     {
                                         <td>
-                                            <i class="badge badge-pill badge-secondary">Signed In</i>
+                                            <i class="badge badge-pill badge-secondary">Cancelled</i>
                                         </td>
+
                                     }
                                     else if (item.Cancelled == false && item.IsGranted == false)
                                     {
@@ -76,15 +86,18 @@
                                         </td>
                                         <td>
 
-                                            <a class="btn btn-danger" asp-action="GrantAccess" asp-controller="Dashboard" asp-route-tag="@item.TagNo">Cancel</a>
+                                            <a class="btn btn-danger" asp-action="CancelBooking" asp-controller="Dashboard" asp-route-tag="@item.TagNo">Cancel</a>
                                         </td>
 
                                     }
-                                    else if (item.IsGranted == false && item.Cancelled == true)
+                                    else if (@item.IsGranted == true)
                                     {
                                         <td>
-                                            <i class="badge badge-pill badge-secondary">Cancelled</i>
+                                            <i class="badge badge-pill badge-secondary">Signed In</i>
+
+                                            <a class="btn btn-warning ml-3" asp-action="SignVisitorOut" asp-controller="Dashboard" asp-route-Tag="@item.TagNo" asp-route-Id="@item.UserId"> Sign Out</a>
                                         </td>
+
 
                                     }
 

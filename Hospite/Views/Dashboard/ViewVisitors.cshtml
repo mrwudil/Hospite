@@ -19,6 +19,16 @@
             </div>
 
 
+            @if (Model.Cancelled == false && User.IsInRole("Admin"))
+            {
+                <a class="btn btn-success" asp-action="GrantAccess" asp-controller="Dashboard" asp-route-tag="@Model.TagNo">Grant Access</a>
+
+            }
+            else
+            {
+                @*<a class="btn btn-warning col-2 ml-auto" asp-action="SignVisitorOut" asp-controller="Dashboard" asp-route-Tag="@Model.TagNo" asp-route-Id="@Model.UserId"> Sign Out</a>*@
+
+            }
 
             @if (Model.GrantedAccess == false && Model.Cancelled == false)
             {
@@ -26,86 +36,92 @@
                     No Access Granted Yet
                 </h6>
             }
-            
-            @if (Model.Cancelled == true)
-            {
-
-            }
-            else 
-            {
-                <a class="btn btn-warning col-2 ml-auto" asp-action="SignVisitorOut" asp-controller="Dashboard" asp-route-Tag="@Model.TagNo" asp-route-Id="@Model.UserId"> Sign Out</a>
-            }
-
 
         </div>
+
+        <div class="col-sm-12 text-right">
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Access" asp-controller="Dashboard" class="btn btn-warning ml-auto"> Back</a>
+            }
+            else
+            {
+                <a asp-action="Index" asp-controller="Dashboard" class="btn btn-warning ml-auto"> Back</a>
+
+            }
+        </div>
+
+
+
         <div class="col-sm-12 d-flex justify-content-center align-content-center pt-4 p-2">
 
-                <div class="col-12 d-flex justify-content-center align-content-center font-weight-bold ">
-                    <div class="col-lg-6">
-                        <div class="row mb-3">
-                            <label for="Name" class="col-sm-4 col-form-label">Full Name</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" placeholder="@Model.VisitorName" disabled>
-                            </div>
+            <div class="col-12 d-flex justify-content-center align-content-center font-weight-bold ">
+                <div class="col-lg-6">
+                    <div class="row mb-3">
+                        <label for="Name" class="col-sm-4 col-form-label">Full Name</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" placeholder="@Model.VisitorName" disabled>
                         </div>
-
-                        @if (User.IsInRole("Admin"))
-                         {
-
-                            <div class="row mb-3">
-                                <label for="Name" class="col-sm-4 col-form-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" placeholder="@Model.Email" disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="Phome" class="col-sm-4 col-form-label">Gender</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" placeholder="@Model.Gender" disabled>
-                                </div>
-                            </div>
-
-                         }
-
-
-
-                        <div class="row mb-3">
-                            <label for="Phome" class="col-sm-4 col-form-label">Contact Name</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" placeholder="@Model.PhoneNumber" disabled>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="Time" class="col-sm-4 col-form-label">Booking Time</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" placeholder="@Model.BookingTime" disabled>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="tag" class="col-sm-4 col-form-label">Tag No</label>
-                            <div class="col-sm-8">
-                                <input class="form-control" placeholder="@Model.TagNo" disabled>
-                            </div>
-                        </div>
-                        @if (User.IsInRole("Admin"))
-                         {
-
-                            <div class="row mb-3">
-                                <label for="Time" class="col-sm-4 col-form-label">Address</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control" placeholder="@Model.Address.StreetNo @Model.Address.AddressTitle @Model.Address.City" disabled>
-                                </div>
-                            </div>
-
-                         }
                     </div>
 
                     @if (User.IsInRole("Admin"))
                     {
-                          <div class="col-lg-6">
-                        
+
+                        <div class="row mb-3">
+                            <label for="Name" class="col-sm-4 col-form-label">Email</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" placeholder="@Model.Email" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="Phome" class="col-sm-4 col-form-label">Gender</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" placeholder="@Model.Gender" disabled>
+                            </div>
+                        </div>
+
+                    }
+
+
+
+                    <div class="row mb-3">
+                        <label for="Phome" class="col-sm-4 col-form-label">Contact Name</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" placeholder="@Model.PhoneNumber" disabled>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="Time" class="col-sm-4 col-form-label">Booking Time</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" placeholder="@Model.BookingTime" disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="tag" class="col-sm-4 col-form-label">Tag No</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" placeholder="@Model.TagNo" disabled>
+                        </div>
+                    </div>
+                    @if (User.IsInRole("Admin"))
+                    {
+
+                        <div class="row mb-3">
+                            <label for="Time" class="col-sm-4 col-form-label">Address</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" placeholder="@Model.Address.StreetNo @Model.Address.AddressTitle @Model.Address.City" disabled>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="col-lg-6">
+
 
                         <div class="row mb-3">
                             <label for="tag" class="col-sm-4 col-form-label">Purpose</label>
@@ -149,9 +165,9 @@
                         </div>
 
                     </div>
-                    }
+                }
 
-                </div>
+            </div>
         </div>
     </div>
 </div>
