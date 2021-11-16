@@ -186,3 +186,4 @@ C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\MailKit.dll
 C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\MimeKit.dll
 C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\NETCore.MailKit.dll
 C:\Users\hp\source\repos\Hospite\Hospite\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\hp\source\repos\Hospite\Hospite\obj\Debug\net5.0\Razor\Views\Dashboard\ViewEmployees.cshtml.g.cs

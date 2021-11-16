@@ -8,7 +8,10 @@ namespace Hospite.Models
 {
     public class EmpListViewModel
     {
+        public string Id { get; set; }
         public string Name { get; set; }
+
+        public string PhoneNumber { get; set; }
         public bool IsAvailable { get; set; }
         public string Email { get; set; }
     }

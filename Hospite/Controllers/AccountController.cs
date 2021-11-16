@@ -47,7 +47,8 @@ namespace Hospite.Controllers
             var user = await _userManager.FindByEmailAsync(model.Email);
             if(user == null)
             {
-                return null;
+                ViewBag.LoginErrMsg = true;
+                return View();
             }
             var checkPassword = await _signInManager.PasswordSignInAsync(user,model.Password,false,false);
             if (!checkPassword.Succeeded)
@@ -88,9 +89,9 @@ namespace Hospite.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
+        public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
         {
-
+            var DefaultPassword = "Password@2021";
             var checkuser = await _userManager.FindByEmailAsync(model.Email);
             if(checkuser != null)
             {
@@ -105,13 +106,15 @@ namespace Hospite.Controllers
                 PhoneNumber = model.Phone
             };
 
-            var res = await _userManager.CreateAsync(newUser, model.Password);
+            var res = await _userManager.CreateAsync(newUser, DefaultPassword);
+            var role = await _userManager.AddToRoleAsync(newUser,"Employee");
             if (!res.Succeeded)
             {
                 return BadRequest();
             }
 
-            return RedirectToAction("Index","Visitor");
+            ViewBag.Message = "User Created";
+            return RedirectToAction("Index","Dashboard");
         }
 
         [HttpPost]

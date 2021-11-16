@@ -365,6 +365,29 @@ namespace Hospite.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AllEmployee()
+        {
+            var list = new List<EmpListViewModel>();
+            var users = await _userManager.GetUsersInRoleAsync("Employee");
+            foreach (var item in users)
+            {
+                var emp = new EmpListViewModel
+                {
+                    Name = item.Name,
+                    Email = item.Email,
+                    Id = item.Id,
+                    PhoneNumber = item.PhoneNumber
+                };
+
+                list.Add(emp);
+
+            }
+
+            return View("ViewEmployees", list);
+
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GrantAccess(string tag)
         {
             
